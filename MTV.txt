@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 hoc git
 trung
+=======
+hoc git
+>>>>>>> parent of b99b0b7... Add text
