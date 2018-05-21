@@ -1,6 +1,9 @@
 <<<<<<< HEAD
 hoc git
+<<<<<<< HEAD
 trung
 =======
 hoc git
 >>>>>>> parent of b99b0b7... Add text
+=======
+>>>>>>> parent of 5f086a8... Delete
