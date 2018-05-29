@@ -1,12 +1,14 @@
 hoc git
-<<<<<<< HEAD
 trung
 <<<<<<< HEAD
 =======
 hoc git
 >>>>>>> parent of b99b0b7... Add text
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 5f086a8... Delete
 =======
 
 >>>>>>> 4043c4203e85644e61e3345f15c0ba2a0d005659
+=======
+>>>>>>> parent of 7e81e99... wtf

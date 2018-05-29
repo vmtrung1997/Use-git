@@ -1,0 +1,58 @@
+﻿def xgcd(b, a):
+	x0, x1, y0, y1 = 1,0,0,1
+	while (a != 0):
+		q, b, a = b//a, a, b % a
+		x0, x1 = x1, x0 - q * x1
+		y0, y1 = y1, y0 - q * y1
+
+	return  b,x0, y0
+
+def inverse(a,n):
+	while a<0:
+		a += n
+	gdc,b,k = xgcd(a,n)
+	if n==1 or n==0:
+		return false
+	if gdc != 1:
+		return false
+	else:
+		if b < 0:
+			return b+n
+		return b
+
+def gcd(a , b):
+	while a!=0:
+		r = b%a
+		b,a = a,r
+	gcd = b
+	return b
+
+x_array = list()
+num = input("Enter how many elements you want:")
+print('Input array x: ')
+for i in range(int(num)):
+    n = input("num :")
+    x_array.append(int(n))
+print ('ARRAY: ',x_array)
+
+multi = 1
+m_array = list()
+print('Input array m: ')
+for i in range(int(num)):
+    n = input("num :")
+    m_array.append(int(n))
+    multi *= int(n)
+
+multi_array = 0
+
+for i in range(int(num)):
+	multi_i = multi // m_array[i]
+	gcd  = inverse(multi_i,m_array[i])
+	multi_array += gcd * multi_i * x_array[i]
+	
+kq = 0
+if multi_array>multi:
+	kq = multi_array % multi
+else:
+	kq = multi % multi_array
+print("Ket qua: ",kq)

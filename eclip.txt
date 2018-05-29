@@ -1,0 +1,101 @@
+﻿def isOnEllipticCurve(a,b,x,y):
+	if x**3 + a*x + b - y**2 == 0:
+		return True
+	else:
+		return False
+
+def pointPQ(xp,yp,xq,yq):
+	lamda = (yq - yp) / (xq - xp)
+	xr = lamda**2 -xp - xq
+	yr = lamda*(xp - xr) - yp
+	return xr, yr
+
+def point2P(a,xp,yp):
+	lamda = (3*xp**2 + a)/(2*yp)
+	xr = lamda**2 - 2*xp
+	yr = lamda*(xp - xr) - yp
+	return xr, yr
+
+def nPCalculate(a,x,y,n):
+	if n==1:
+		return x,y
+	if n==2:
+		return point2P(a, x, y)
+	if n%2 == 0:
+		res = nPCalculate(a, x, y, n//2)
+		return point2P(a,res[0],res[1])
+
+	res = nPCalculate(a, x, y, n-1)
+	return pointPQ(res[0], res[1],x,y)
+
+print("Elliptic Curve (E): Y^3 = X^3 + aX +b")
+while True:
+	a = float(input("Input a: "))
+	b = float(input("Input b: "))
+	if 4*a**3 + 27*b**b != 0:
+		break
+	else:
+		print("a,b incorrect, please try again")
+
+print("Check P on (E)")
+print("Input P(x,y)")
+xp = float(input("Input xp: "))
+yp = float(input("Input yp: "))
+
+if isOnEllipticCurve(a,b,xp,yp):
+	print("P is on (E)")
+else:
+	print("P is not on (E)")
+
+print("P + Q = R")
+
+
+while True:
+	print("Input P(x,y) on (E)")
+	xp = float(input("Input xp: "))
+	yp = float(input("Input yp: "))
+	if isOnEllipticCurve(a,b,xp,yp) == False:
+		print("P is not on (E), please try again")
+	else:
+		break
+
+while True:
+	print("Input Q(x,y) on (E) different P")
+	xq = float(input("Input xq: "))
+	yq = float(input("Input yq: "))
+	if isOnEllipticCurve(a,b,xq,yq):
+		if xq == xp:
+			print("R = 0")
+		else:
+			xr, yr = pointPQ(xp,yp,xq,yq)
+			print("R = ({},{})".format(xr,yr))
+			break
+	else:
+		print("Q is not on (E), please try again")	
+
+# a = -6
+# b = 5
+# xp = 2
+# yp = 1
+# n = 10
+# res1 = point2P(a,xp,yp)
+# res2 = point2P(a,res1[0],res1[1])
+# res3 = pointPQ(res2[0],res2[1],xp,yp)
+# res4 = point2P(a,res3[0],res3[1])
+
+# print(res4)
+
+# print(nPCalculate(a,xp,yp,n))
+
+n = int(input("Nhap n: "))
+while True:
+	print("Input P(x,y) on (E)")
+	xp = float(input("Input xp: "))
+	yp = float(input("Input yp: "))
+	if isOnEllipticCurve(a,b,xp,yp) == False:
+		print("P is not on (E), please try again")
+	else:
+		res = nPCalculate(a,xp,yp,n)
+		print("Result: ")
+		print(res)
+		break

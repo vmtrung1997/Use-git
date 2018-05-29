@@ -1,0 +1,37 @@
+﻿#Bài 1: a^b mod n theo cách nhị phân (có đệ quy)
+def TinhMu(a,b,n):
+    if b==0:
+        return 1
+    if b%2==0:
+        res = TinhMu(a,b//2,n) %n
+        return res**2 %n
+    return (TinhMu(a,b-1,n)*a) %n
+#Bài 1: a^b mod n theo cách nhị phân (không đệ quy)
+def TinhMu2(a,b,n):
+    r = 1
+    while b>0:
+        if b%2 == 1:
+            r = (r*a)%n
+            b = b-1
+        b//=2
+        a = (a*a)%n
+    return r
+
+print(TinhMu(12345,20010101,678910))
+
+print(TinhMu2(12345,20010101,678910))
+
+#Bài 2: a^b có sử dụng CRT và phi hàm Euler
+def TinhMu3(a,b,n):
+    r = 1
+    s,q = a,b
+    while (q>0):
+        if q%2 ==1:
+            r = (r*s) %n
+        s = (s*s) %n
+        q = q//2
+    return r
+
+print(TinhMu3(12345,20010101,678910))
+
+print('Kết quả đúng: {}'.format(pow(12345,20010101,678910)))
